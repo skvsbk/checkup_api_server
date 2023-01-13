@@ -1,16 +1,26 @@
-# This is a sample Python script.
+from fastapi import FastAPI
+from routers import checkups, facilities, nfc, params, routes, users
+import uvicorn
+from db import database
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# https://www.youtube.com/watch?v=qduT62Bygyw
+
+app = FastAPI(title='Electronic journal of inspections')
+app.include_router(checkups.router, prefix='/checkups', tags=['checkups'])
+app.include_router(facilities.router, prefix='/facilities', tags=['facilities'])
+app.include_router(nfc.router, prefix='/nfc', tags=['nfc'])
+app.include_router(params.router, prefix='/params', tags=['params'])
+app.include_router(routes.router, prefix='/routes', tags=['routes'])
+app.include_router(users.router, prefix='/users', tags=['users'])
+
+@app.on_event('startup')
+async def startup():
+    await database.connect()
+
+@app.on_event('shutdown')
+def shutdown():
+    await database.disconnect()
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    uvicorn.run('main:app', port=8000, host='0.0.0.0', reload=True)
