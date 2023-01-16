@@ -1,12 +1,11 @@
 from databases import Database
 from sqlalchemy import create_engine, MetaData
+from starlette.config import Config
 
-# todo get from .env
-DATABASE_URL = '127.0.0.1'
-# DATABASE_PORT = 53000
-# DATABASE_USER = 'root'
-# DATABASE_PASSWORD = 'dkhlkwjdef'
-# DATABASE_DB = 'checkup_ogi'
+
+config = Config('.env')
+
+DATABASE_URL = "mysql+pymysql://root:Ad147852@127.0.0.1:53000/checkup_ogi?charset=utf8mb4" # config('CU_DATABASE_URL', cast=str, default='')
 
 database = Database(DATABASE_URL)
 metadata = MetaData()

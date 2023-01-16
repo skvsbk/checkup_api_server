@@ -1,7 +1,12 @@
 from fastapi import FastAPI
 from routers import checkups, facilities, nfc, params, routes, users
 import uvicorn
-from db import database
+from db.base import database
+# from base import metadata
+from sqlalchemy.sql import select
+from routers import users, routes
+
+
 
 # https://www.youtube.com/watch?v=qduT62Bygyw
 
@@ -13,12 +18,13 @@ app.include_router(params.router, prefix='/params', tags=['params'])
 app.include_router(routes.router, prefix='/routes', tags=['routes'])
 app.include_router(users.router, prefix='/users', tags=['users'])
 
+
 @app.on_event('startup')
 async def startup():
     await database.connect()
 
 @app.on_event('shutdown')
-def shutdown():
+async def shutdown():
     await database.disconnect()
 
 

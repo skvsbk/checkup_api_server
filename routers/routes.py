@@ -3,5 +3,5 @@ from fastapi import APIRouter
 router = APIRouter()
 
 @router.get('/')
-async def get_routes():
-    return {'routes': 'routes'}
+async def get_route():
+    return {'route': 'route'}

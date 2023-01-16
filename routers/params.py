@@ -3,5 +3,5 @@ from fastapi import APIRouter
 router = APIRouter()
 
 @router.get('/')
-async def get_params():
-    return {'params': 'params'}
+async def get_param():
+    return {'param': 'param'}
