@@ -1,14 +1,17 @@
-from typing import Optional
+# from typing import Optional
 from pydantic import BaseModel, validator
+
 
 # to get user
 class User(BaseModel):
-    user_id: Optional[int] = None
+    # user_id: Optional[int] = None
     login: str
     password: str
     role_id: int
     name: str
-    active: bool
+    # active: bool
+    pass
+
 
 # to add new user
 class UserIn(BaseModel):
@@ -24,7 +27,3 @@ class UserIn(BaseModel):
         if 'password' in values and v != values['password']:
             raise ValueError("Passwords does not match")
         return v
-
-class Role(BaseModel):
-    role_id: int
-    name: str

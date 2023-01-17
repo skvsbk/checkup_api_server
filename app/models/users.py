@@ -1,5 +1,5 @@
 import sqlalchemy
-from app.models.base import metadata
+from app.models.database import metadata
 
 
 users = sqlalchemy.Table(
@@ -13,12 +13,4 @@ users = sqlalchemy.Table(
     sqlalchemy.Column('active', sqlalchemy.Boolean(),
                       server_default=sqlalchemy.sql.expression.true(),
                       nullable=False,)
-)
-
-user_roles = sqlalchemy.Table(
-    'user_roles',
-    metadata,
-    sqlalchemy.Column('role_id', sqlalchemy.Integer, primary_key=True, autoincrement=True),
-    sqlalchemy.Column('name', sqlalchemy.String(50)),
-
 )

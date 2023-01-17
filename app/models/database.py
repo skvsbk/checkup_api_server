@@ -9,6 +9,4 @@ DATABASE_URL = "mysql+pymysql://root:Ad147852@127.0.0.1:53000/checkup_ogi?charse
 
 database = Database(DATABASE_URL)
 metadata = MetaData()
-engine = create_engine(
-    DATABASE_URL,
-)
+engine = create_engine(DATABASE_URL)

@@ -2,6 +2,6 @@
 from pydantic import BaseModel
 
 
-class Facility(BaseModel):
-    facility_id: int = None
+class ValUnit(BaseModel):
+    unit_id: int = None
     name: str

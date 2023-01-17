@@ -1,16 +1,8 @@
 import sqlalchemy
-from app.models.base import metadata
-from app.models.facilities import plants
-from app.models.routes import routes
+from app.models.database import metadata
+# from app.models.facilities import plants
+# from app.models.routes import routes
 
-
-nfc_tag = sqlalchemy.Table(
-    'nfc_tag',
-    metadata,
-    sqlalchemy.Column('nfc_id', sqlalchemy.Integer, primary_key=True, autoincrement=True),
-    sqlalchemy.Column('nfc_serial', sqlalchemy.String(14)),
-    sqlalchemy.Column('plant_id', sqlalchemy.ForeignKey('plants.plant_id'))
-)
 
 checkups = sqlalchemy.Table(
     'checkups',
@@ -18,15 +10,7 @@ checkups = sqlalchemy.Table(
     sqlalchemy.Column('checkup_id', sqlalchemy.Integer, primary_key=True, autoincrement=True),
     sqlalchemy.Column('completed', sqlalchemy.Boolean),
     sqlalchemy.Column('route_id', sqlalchemy.ForeignKey('routes.route_id')),
+    sqlalchemy.Column('user_id', sqlalchemy.ForeignKey('users.user_id')),
     sqlalchemy.Column('t_start', sqlalchemy.Integer),
     sqlalchemy.Column('t_end', sqlalchemy.Integer)
-)
-
-checks = sqlalchemy.Table(
-    'checks',
-    metadata,
-    sqlalchemy.Column('check_id', sqlalchemy.Integer, primary_key=True, autoincrement=True),
-    sqlalchemy.Column('note', sqlalchemy.String(256)),
-    sqlalchemy.Column('checkup_id', sqlalchemy.ForeignKey('checkups.checkup_id')),
-    sqlalchemy.Column('nfc_id', sqlalchemy.ForeignKey('nfc_tag.nfc_id')),
 )
