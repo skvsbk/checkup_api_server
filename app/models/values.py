@@ -1,7 +1,5 @@
 import sqlalchemy
-from db.base import metadata
-from db.checkups import checks, nfc_tag
-
+from app.models.base import metadata
 
 val_units = sqlalchemy.Table(
     'val_units',

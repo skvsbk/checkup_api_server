@@ -14,7 +14,7 @@ class Unit(BaseModel):
     unit_id: int = None
     name: str
 
-class CheckValue(BaseModel):
+class CheckingValue(BaseModel):
     valuecheck_id: int
     value: float
     note: str

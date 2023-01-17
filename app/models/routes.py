@@ -1,7 +1,7 @@
 import sqlalchemy
-from db.base import metadata
-from db.checkups import nfc_tag
-from db.facilities import facilities
+from app.models.base import metadata
+from app.models.checkups import nfc_tag
+from app.models.facilities import facilities
 
 
 routes = sqlalchemy.Table(

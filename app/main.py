@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from routers import checkups, facilities, nfc, params, routes, users
 import uvicorn
-from db.base import database
+from models.base import database
 # from base import metadata
 from sqlalchemy.sql import select
 from routers import users, routes

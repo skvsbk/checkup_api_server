@@ -1,5 +1,5 @@
 import sqlalchemy
-from db.base import metadata
+from app.models.base import metadata
 
 
 facilities = sqlalchemy.Table(
