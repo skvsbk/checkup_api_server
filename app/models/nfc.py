@@ -1,11 +1,12 @@
-import sqlalchemy
-from app.models.database import metadata
+from sqlalchemy import Column, String, Integer, Float, ForeignKey
+from sqlalchemy.orm import relationship
+from app.models.database import Base
 
 
-nfc_tag = sqlalchemy.Table(
-    'nfc_tag',
-    metadata,
-    sqlalchemy.Column('nfc_id', sqlalchemy.Integer, primary_key=True, autoincrement=True),
-    sqlalchemy.Column('nfc_serial', sqlalchemy.String(14)),
-    sqlalchemy.Column('plant_id', sqlalchemy.ForeignKey('plants.plant_id'))
-)
+class NfcTagDB(Base):
+    __tablename__ = 'nfc_tag'
+    nfc_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    nfc_serial = Column(String(14))
+    plant_id = Column(Integer, ForeignKey('plants.plant_id'), index=True)
+
+    plant = relationship('PlantsDB', backref='nfc_tag')

@@ -1,10 +1,8 @@
-import sqlalchemy
-from app.models.database import metadata
+from sqlalchemy import Column, String, Integer
+from app.models.database import Base
 
 
-facilities = sqlalchemy.Table(
-    'facilities',
-    metadata,
-    sqlalchemy.Column('facility_id', sqlalchemy.Integer, primary_key=True, autoincrement=True),
-    sqlalchemy.Column('name', sqlalchemy.String(30))
-)
+class FacilitiesDB(Base):
+    __tablename__ = 'facilities'
+    facility_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    name = Column(String(30))

@@ -1,16 +1,16 @@
-import sqlalchemy
-from app.models.database import metadata
-# from app.models.facilities import plants
-# from app.models.routes import routes
+from sqlalchemy import Column, Integer, Boolean, ForeignKey
+from sqlalchemy.orm import relationship
+from app.models.database import Base
 
 
-checkups = sqlalchemy.Table(
-    'checkups',
-    metadata,
-    sqlalchemy.Column('checkup_id', sqlalchemy.Integer, primary_key=True, autoincrement=True),
-    sqlalchemy.Column('completed', sqlalchemy.Boolean),
-    sqlalchemy.Column('route_id', sqlalchemy.ForeignKey('routes.route_id')),
-    sqlalchemy.Column('user_id', sqlalchemy.ForeignKey('users.user_id')),
-    sqlalchemy.Column('t_start', sqlalchemy.Integer),
-    sqlalchemy.Column('t_end', sqlalchemy.Integer)
-)
+class CheckupsDB(Base):
+    __tablename__ = 'checkups'
+    checkup_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    completed = Column(Boolean)
+    route_id = Column(Integer, ForeignKey('routes.route_id'), index=True)
+    user_id = Column(Integer, ForeignKey('users.user_id'), index=True)
+    t_start = Column(Integer)
+    t_end = Column(Integer)
+
+    routes = relationship('RoutesDB', backref='checkups')
+    user = relationship('UserDB', backref='checkups')

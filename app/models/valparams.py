@@ -1,14 +1,17 @@
-import sqlalchemy
-from app.models.database import metadata
+from sqlalchemy import Column, String, Integer, Float, ForeignKey
+from sqlalchemy.orm import relationship
+from app.models.database import Base
 
 
-val_params = sqlalchemy.Table(
-    'val_params',
-    metadata,
-    sqlalchemy.Column('param_id', sqlalchemy.Integer, primary_key=True, autoincrement=True),
-    sqlalchemy.Column('name', sqlalchemy.String(30)),
-    sqlalchemy.Column('unit_id', sqlalchemy.ForeignKey('val_units')),
-    sqlalchemy.Column('nfc_id', sqlalchemy.ForeignKey('nfc.nfc_id')),
-    sqlalchemy.Column('min_value', sqlalchemy.Float),
-    sqlalchemy.Column('max_value', sqlalchemy.Float)
-)
+class ValParamsDB(Base):
+    __tablename__ = 'val_params'
+
+    param_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    name = Column(String(30))
+    unit_id = Column(Integer, ForeignKey('val_units'), index=True)
+    nfc_id = Column(Integer, ForeignKey('nfc.nfc_id'), index=True)
+    min_value = Column(Float)
+    max_value = Column(Float)
+
+    units = relationship('ValUnitsDB', backref='val_params')
+    nfctag = relationship('NfcTagDB', backref='val_params')

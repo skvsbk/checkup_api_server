@@ -1,12 +1,14 @@
-import sqlalchemy
-from app.models.database import metadata
+from sqlalchemy import Column, String, Integer, Boolean, ForeignKey
+from sqlalchemy.orm import relationship
+from app.models.database import Base
 
 
-checks = sqlalchemy.Table(
-    'checks',
-    metadata,
-    sqlalchemy.Column('check_id', sqlalchemy.Integer, primary_key=True, autoincrement=True),
-    sqlalchemy.Column('note', sqlalchemy.String(256)),
-    sqlalchemy.Column('checkup_id', sqlalchemy.ForeignKey('checkups.checkup_id')),
-    sqlalchemy.Column('nfc_id', sqlalchemy.ForeignKey('nfc_tag.nfc_id')),
-)
+class ChecksDB(Base):
+    __tablename__ = 'checks'
+    check_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    note = Column(String(256))
+    checkup_id = Column(Integer, ForeignKey('checkups.checkup_id'), index=True)
+    nfc_id = Column(Integer, ForeignKey('nfc_tag.nfc_id'), index=True)
+
+    checkups = relationship('CheckupsDB', backref='checks')
+    nfctag = relationship('NfcTagDB', backref='checks')

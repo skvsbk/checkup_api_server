@@ -1,10 +1,9 @@
-import sqlalchemy
-from app.models.database import metadata
+from sqlalchemy import Column, String, Integer
+from app.models.database import Base
 
 
-val_units = sqlalchemy.Table(
-    'val_units',
-    metadata,
-    sqlalchemy.Column('unit _id', sqlalchemy.Integer, primary_key=True, autoincrement=True),
-    sqlalchemy.Column('name', sqlalchemy.String(10)),
-)
+class ValUnitsDB(Base):
+    __tablename__ = 'val_units'
+
+    unit_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    name = Column(String(10))
