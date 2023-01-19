@@ -1,35 +1,22 @@
-from typing import List
-
-from databases.interfaces import Record
-
-from app.models.users import users, user_roles
-from app.schemas.user import User, UserIn, Role
-from .base import BaseUtil
+from app.schemas.user import UserCreate
+from sqlalchemy.orm import Session
+from app.models import users
 
 
-class UserUtils(BaseUtil):
-    async def get_all(self, limit: int, skip: int = 0):
-        query = users.select().limit(limit).offset(skip)
-        return await self.database.fetch_all(query=query)
-
-    async def get_by_login(self, login: str) -> User | None:
-        query = users.select().where(users.c.login == login)
-        return await self.database.fetch_one(query=query)
-
-    async def create(self, u: UserIn) -> User:
-        return
-
-    async def update(self, u: UserIn) -> User:
-        return
+def get_all(db: Session):# ,  limit: int, skip: int = 0) -> List[UserOut]:
+    return db.query(users.UserDB).offset(0).limit(100).all()
 
 
-class RoleUtils(BaseUtil):
-    async def get_all(self, limit: int, skip: int = 0) -> list[Record]:
-        query = user_roles.select().limit(limit).offset(skip)
-        return await self.database.fetch_all(query=query)
+def get_user_by_login(db: Session, login: str):
+    res = db.query(users.UserDB).filter(users.UserDB.login == login).first()
+    return res
 
-    async def create(self) -> Role:
-        return
 
-    async def update(self) -> Role:
-        return
+def create_user(db: Session, user: UserCreate):
+    # fake_hashed_password = user.password + "notreallyhashed"
+    db_user = users.UserDB(login=user.login, password=user.password,
+                           role_id=user.role_id, name=user.name, active=user.active)
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+    return db_user

@@ -1,16 +1,16 @@
-import sqlalchemy
-from app.models.database import metadata
+from sqlalchemy import Column, String, Integer, Boolean, ForeignKey
+from sqlalchemy.orm import relationship
+from app.models.database import Base
+from app.models.roles import RoleDB
 
 
-users = sqlalchemy.Table(
-    'users',
-    metadata,
-    sqlalchemy.Column('user_id', sqlalchemy.Integer, primary_key=True, autoincrement=True),
-    sqlalchemy.Column('login', sqlalchemy.String(10)),
-    sqlalchemy.Column('password', sqlalchemy.String(256)),
-    sqlalchemy.Column('role_id', sqlalchemy.ForeignKey('user_roles.role_id')),
-    sqlalchemy.Column('name', sqlalchemy.String(50)),
-    sqlalchemy.Column('active', sqlalchemy.Boolean(),
-                      server_default=sqlalchemy.sql.expression.true(),
-                      nullable=False,)
-)
+class UserDB(Base):
+    __tablename__ = 'users'
+    user_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    login = Column(String(10))
+    password = Column(String(256))
+    role_id = Column(Integer, ForeignKey('user_roles.role_id'))
+    name = Column(String(50))
+    active = Column(Boolean())
+
+    roles = relationship('RoleDB', backref='users')
