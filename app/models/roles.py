@@ -1,11 +1,9 @@
-import sqlalchemy
-from app.models.database import metadata
+from sqlalchemy import Column, String, Integer
+from app.models.database import Base
 
 
-user_roles = sqlalchemy.Table(
-    'user_roles',
-    metadata,
-    sqlalchemy.Column('role_id', sqlalchemy.Integer, primary_key=True, autoincrement=True),
-    sqlalchemy.Column('name', sqlalchemy.String(50)),
+class RoleDB(Base):
+    __tablename__ = 'user_roles'
+    role_id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(50))
 
-)

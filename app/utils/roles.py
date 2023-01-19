@@ -1,17 +1,5 @@
-# from typing import List
-from databases.interfaces import Record
-from app.models.roles import user_roles
-from app.schemas.role import Role
-from .base import BaseUtil
+from sqlalchemy.orm import Session
+from app.models import roles
 
-
-class RoleUtils(BaseUtil):
-    async def get_all(self, limit: int, skip: int = 0) -> list[Record]:
-        query = user_roles.select().limit(limit).offset(skip)
-        return await self.database.fetch_all(query=query)
-
-    async def create(self) -> Role:
-        return
-
-    async def update(self) -> Role:
-        return
+def get_all(db: Session): # self, limit: int, skip: int = 0) :
+    return db.query(roles.RoleDB).all()

@@ -1,16 +1,10 @@
-import sqlalchemy
-from app.models.database import metadata
-# from app.models.checkups import nfc_tag
-# from app.models.facilities import facilities
+from sqlalchemy import Column, String, Integer, Boolean, ForeignKey
+from app.models.database import Base
 
 
-routes = sqlalchemy.Table(
-    'routes',
-    metadata,
-    sqlalchemy.Column('route_id', sqlalchemy.Integer, primary_key=True, autoincrement=True),
-    sqlalchemy.Column('name', sqlalchemy.String(30)),
-    sqlalchemy.Column('plant_id', sqlalchemy.ForeignKey('plants.plant_id')),
-    sqlalchemy.Column('active', sqlalchemy.Boolean(),
-                      server_default=sqlalchemy.sql.expression.true(),
-                      nullable=False,)
-)
+class RoutesDB(Base):
+    __tablename__ = 'routes'
+    route_id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(30))
+    plant_id = Column(Integer, ForeignKey('plants.plant_id'))
+    active = Column(Boolean())
