@@ -1,13 +1,10 @@
 from fastapi import FastAPI
 import uvicorn
 from app.routers import checkups, facilities, nfc, valparams, routes, users, roles
-# from app.models.database import database
 from app.models.database import engine, Base, get_db
 from app.utils import users_crud, roles_crud
 from app.schemas import role, user
 
-
-# Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title='Electronic journal of inspections')
 app.include_router(checkups.router, prefix='/checkups', tags=['checkups'])
