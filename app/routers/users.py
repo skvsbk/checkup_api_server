@@ -8,12 +8,17 @@ from app.schemas.user import UserOut, UserCreate
 router = APIRouter()
 
 
-@router.get('/users', response_model=list[UserOut])
+@router.get('/', response_model=list[UserOut])
 def get_users(db: Session = Depends(get_db)): # , limit: int = 100, skip: int = 0):
     return users.get_all(db=db) # , limit=limit, skip=skip)
 
 
-@router.post('/users', response_model=UserOut)
+@router.get('/{login}', response_model=UserOut)
+def get_users(login: str, db: Session = Depends(get_db)): # , limit: int = 100, skip: int = 0):
+    return users.get_user_by_login(db=db, login=login) # , limit=limit, skip=skip)
+
+
+@router.post('/', response_model=UserOut)
 def create_user(user: UserCreate, db: Session = Depends(get_db)):
     db_user = users.get_user_by_login(db=db, login=user.login)
     if db_user:
