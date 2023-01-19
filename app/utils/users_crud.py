@@ -8,8 +8,7 @@ def get_all(db: Session):# ,  limit: int, skip: int = 0) -> List[UserOut]:
 
 
 def get_user_by_login(db: Session, login: str):
-    res = db.query(users.UserDB).filter(users.UserDB.login == login).first()
-    return res
+    return db.query(users.UserDB).filter(users.UserDB.login == login).first()
 
 
 def create_user(db: Session, user: UserCreate):
