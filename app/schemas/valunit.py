@@ -1,7 +1,15 @@
-# from typing import Optional
 from pydantic import BaseModel
 
 
-class ValUnit(BaseModel):
-    unit_id: int = None
+class ValUnitBase(BaseModel):
     name: str
+
+
+class ValUnitOut(ValUnitBase):
+    unit_id: int
+    class Config:
+        orm_mode = True
+
+
+class ValUnitCreate(ValUnitBase):
+    pass

@@ -1,8 +1,18 @@
-# from typing import Optional
+
 from pydantic import BaseModel
 
 
-class NFCTag(BaseModel):
-    nfc_id: int = None
+class NFCTagBase(BaseModel):
     nfc_serial: str
     plant_id: int
+
+
+class NFCTagOut(NFCTagBase):
+    nfc_id: int
+
+    class Config:
+        orm_mode = True
+
+
+class NFCTagCreate(NFCTagBase):
+    pass
