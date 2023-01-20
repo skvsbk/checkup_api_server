@@ -3,8 +3,8 @@ from pydantic import BaseModel
 
 class RouteBase(BaseModel):
     name: str
-    plant_id: int
-    active: bool
+    facility_id: int
+    active: bool = True
 
 
 class RouteOut(RouteBase):

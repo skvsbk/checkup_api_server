@@ -1,6 +1,8 @@
 from sqlalchemy import Column, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
-from app.models.database import Base
+from ..models.database import Base
+from ..models.plants import PlantsDB
+
 
 
 class NfcTagDB(Base):

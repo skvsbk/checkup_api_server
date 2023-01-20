@@ -4,7 +4,7 @@ from ..schemas.user import UserCreate
 from ..models import users
 
 
-def get_all(db: Session,  limit: int, skip: int = 0):
+def get_all(db: Session, limit: int, skip: int = 0):
     return db.query(users.UserDB).offset(skip).limit(limit).all()
 
 

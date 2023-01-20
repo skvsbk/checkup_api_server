@@ -1,7 +1,8 @@
-from sqlalchemy import Column, String, Integer, Boolean, ForeignKey
+from sqlalchemy import Column, String, Integer, ForeignKey
 from sqlalchemy.orm import relationship
-from app.models.database import Base
-
+from ..models.database import Base
+from ..models.checkups import CheckupsDB
+from ..models.nfc import NfcTagDB
 
 class ChecksDB(Base):
     __tablename__ = 'checks'

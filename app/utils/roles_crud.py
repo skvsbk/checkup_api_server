@@ -4,7 +4,7 @@ from ..models import roles
 from ..schemas.role import RoleCreate
 
 
-def get_all(db: Session, limit: int, skip: int = 0) :
+def get_all(db: Session, limit: int, skip: int = 0):
     return db.query(roles.RoleDB).offset(skip).limit(limit).all()
 
 

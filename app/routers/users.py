@@ -9,13 +9,13 @@ router = APIRouter()
 
 
 @router.get('/', response_model=list[UserOut])
-def get_users(db: Session = Depends(get_db), limit: int = 100, skip: int = 0):
+def get_users(limit: int = 100, skip: int = 0, db: Session = Depends(get_db)):
     return users_crud.get_all(db=db, limit=limit, skip=skip)
 
 
 @router.get('/{login}', response_model=UserOut)
-def get_user_by_login(login: str, db: Session = Depends(get_db)): # , limit: int = 100, skip: int = 0):
-    return users_crud.get_user_by_login(db=db, login=login) # , limit=limit, skip=skip)
+def get_user_by_login(login: str, db: Session = Depends(get_db)):
+    return users_crud.get_user_by_login(db=db, login=login)
 
 
 @router.post('/', response_model=UserOut)

@@ -2,8 +2,9 @@ from pydantic import BaseModel
 
 
 class CheckupBase(BaseModel):
-    completed: bool
+    completed: bool = False
     route_id: int
+    user_id: int
     t_start: int
     t_end: int
 

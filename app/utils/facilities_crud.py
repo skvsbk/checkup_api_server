@@ -14,9 +14,9 @@ def create(db: Session, facility: FacilityCreate):
     return db_facility
 
 
-def update(db: Session):
-    return
-
-
-def delete(db: Session):
-    return
+# def update(db: Session):
+#     return
+#
+#
+# def delete(db: Session):
+#     return
