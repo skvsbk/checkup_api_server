@@ -1,16 +1,17 @@
-from base import BaseUtil
-from app.schemas.valparam import ValParam
+from ..schemas.valparam import ValParamCreate
 
 
-class ParamUtils(BaseUtil):
-    async def get_by_id(self) -> ValParam:
-        return
+def get_by_id():
+    return
 
-    async def create(self) -> ValParam:
-        return
 
-    async def update(self) -> ValParam:
-        return
+def create():
+    return
 
-    async def delete(self):
-        return
+
+def update():
+    return
+
+
+def delete():
+    return

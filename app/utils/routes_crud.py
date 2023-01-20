@@ -1,16 +1,17 @@
-from .base import BaseUtil
-from app.schemas.route import Route
+from ..schemas.route import RouteCreate
 
 
-class RouteUtils(BaseUtil):
-    async def get_all(self) -> Route:
-        return
+def get_all():
+    return
 
-    async def create(self) -> Route:
-        return
 
-    async def update(self) -> Route:
-        return
+def create():
+    return
 
-    async def delete(self):
-        return
+
+def update():
+    return
+
+
+def delete():
+    return

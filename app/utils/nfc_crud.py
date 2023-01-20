@@ -1,19 +1,21 @@
-from base import BaseUtil
-from app.schemas.nfc import NFCTag
+from ..schemas.nfc import NFCTagCreate
 
 
-class NFCTagUtils(BaseUtil):
-    async def get_all(self) -> NFCTag:
-        return
+def get_all():
+    return
 
-    async def get_with_params(self) -> NFCTag:
-        return
 
-    async def create(self) -> NFCTag:
-        return
+def get_with_params():
+    return
 
-    async def update(self) -> NFCTag:
-        return
 
-    async def delete(self):
-        return
+def create():
+    return
+
+
+def update():
+    return
+
+
+def delete():
+    return

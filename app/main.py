@@ -20,7 +20,7 @@ app.include_router(roles.router, prefix='/roles', tags=['roles'])
 async def startup():
 
     db = get_db().__next__()
-    roles = roles_crud.get_all(db=db)
+    roles = roles_crud.get_all(db=db, limit=100, skip=0)
     if roles == []:
         # create roles at first start
         role_admin = roles_crud.create_role(role=role.RoleCreate(name='admin'), db=db)

@@ -1,16 +1,17 @@
-from .base import BaseUtil
-from app.schemas.routelink import RouteLink
+from ..schemas.routelink import RouteLinkCreate
 
 
-class RouteLinkUtils(BaseUtil):
-    async def get_by_route_id(self) -> RouteLink:
-        return
+def get_by_route_id():
+    return
 
-    async def add_link(self) -> RouteLink:
-        return
 
-    async def remove_link(self):
-        return
+def add_link():
+    return
 
-    async def update_kink(self) -> RouteLink:
-        return
+
+def remove_link():
+    return
+
+
+def update_kink():
+    return

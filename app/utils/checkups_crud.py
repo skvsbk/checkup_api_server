@@ -1,16 +1,17 @@
-from base import BaseUtil
-from app.schemas.checkup import Checkup
+from ..schemas.checkup import CheckupCreate
 
 
-class CheckupUtils(BaseUtil):
-    async def get_all_by_facility_id(self) -> Checkup:
-        return
+def get_all_by_facility_id():
+    return
 
-    async def create(self) -> Checkup:
-        return
 
-    async def update(self) -> Checkup:
-        return
+def create():
+    return
 
-    async def delete(self) -> Checkup:
-        return
+
+def update():
+    return
+
+
+def delete():
+    return

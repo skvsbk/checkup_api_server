@@ -1,16 +1,17 @@
-from base import BaseUtil
-from app.schemas.plant import Plant
+from ..schemas.plant import PlantCreate
 
 
-class PlantUtils(BaseUtil):
-    async def get_all_by_facility_id(self) -> Plant:
-        return
+def get_all_by_facility_id():
+    return
 
-    async def create(self) -> Plant:
-        return
 
-    async def update(self) -> Plant:
-        return
+def create():
+    return
 
-    async def delete(self):
-        return
+
+def update():
+    return
+
+
+def delete():
+    return

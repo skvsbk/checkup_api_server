@@ -1,16 +1,15 @@
-from base import BaseUtil
-from app.schemas.valunit import ValUnit
+from ..schemas.valunit import ValUnitOut
 
 
-class UnitUtils(BaseUtil):
-    async def get_all(self) -> ValUnit:
-        return
 
-    async def create(self) -> ValUnit:
-        return
+async def get_all(self):
+    return
 
-    async def update(self) -> ValUnit:
-        return
+async def create(self):
+    return
 
-    async def delete(self):
-        return
+async def update(self):
+    return
+
+async def delete(self):
+    return

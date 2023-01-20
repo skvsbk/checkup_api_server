@@ -1,13 +1,13 @@
-from base import BaseUtil
-from app.schemas.valcheck import ValCheck
+from ..schemas.valcheck import ValCheckCreate
 
 
-class CheckingValueUtils(BaseUtil):
-    async def get_by_check_id(self) -> ValCheck:
-        return
+def get_by_check_id():
+    return
 
-    async def create(self) -> ValCheck:
-        return
 
-    async def update(self) -> ValCheck:
-        return
+def create():
+    return
+
+
+def update():
+    return

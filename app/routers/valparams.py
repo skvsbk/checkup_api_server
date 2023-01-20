@@ -1,5 +1,5 @@
 from fastapi import APIRouter
-from app.schemas.valparam import ValParamOut
+from ..schemas.valparam import ValParamOut
 
 router = APIRouter()
 
