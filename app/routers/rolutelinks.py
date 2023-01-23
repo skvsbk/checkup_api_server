@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from ..utils import routelinks_crud
-from ..models.database import get_db
-from ..schemas.routelink import RouteLinkCreate, RouteLinkOut
+from app.utils import routelinks_crud
+from app.models.database import get_db
+from app.schemas.routelink import RouteLinkCreate, RouteLinkOut
 
 
 router = APIRouter()

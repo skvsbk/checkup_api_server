@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
+from app.schemas.user import UserCreate
+from app.models import users
 from .base import create_base
-from ..schemas.user import UserCreate
-from ..models import users
 
 
 def get_all(db: Session, limit: int, skip: int = 0):

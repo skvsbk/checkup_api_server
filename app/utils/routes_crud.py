@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
+from app.schemas.route import RouteCreate
+from app.models import routes
 from .base import create_base
-from ..schemas.route import RouteCreate
-from ..models import routes
 
 
 def get_by_facility_id(db: Session, facility_id: int):

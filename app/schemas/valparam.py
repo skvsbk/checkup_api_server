@@ -11,6 +11,7 @@ class ValParamBase(BaseModel):
 
 class ValParamOut(ValParamBase):
     param_id: int
+
     class Config:
         orm_mode = True
 

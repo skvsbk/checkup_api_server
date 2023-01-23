@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
 from .base import create_base
-from ..schemas.nfc import NFCTagCreate
-from ..models import nfc
+from app.schemas.nfc import NFCTagCreate
+from app.models import nfc
 
 
 def get_all_nfc(db: Session, limit: int, skip: int = 0):

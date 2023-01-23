@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
+from app.models import roles
+from app.schemas.role import RoleCreate
 from .base import create_base
-from ..models import roles
-from ..schemas.role import RoleCreate
 
 
 def get_all(db: Session, limit: int, skip: int = 0):

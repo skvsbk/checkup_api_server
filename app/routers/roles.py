@@ -1,9 +1,9 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from ..utils import roles_crud
-from ..models.database import get_db
-from ..schemas.role import RoleOut
-# from ..schemas.role import RoleCreate
+from app.utils import roles_crud
+from app.models.database import get_db
+from app.schemas.role import RoleOut
+# from app.schemas.role import RoleCreate
 
 
 router = APIRouter()

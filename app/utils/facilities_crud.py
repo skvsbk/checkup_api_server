@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session
-from ..schemas.facility import FacilityCreate
-from ..models import facilities
+from app.schemas.facility import FacilityCreate
+from app.models import facilities
 from .base import create_base
 
 

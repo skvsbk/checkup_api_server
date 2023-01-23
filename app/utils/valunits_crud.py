@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
+from app.schemas.valunit import ValUnitCreate
+from app.models import valunits
 from .base import create_base
-from ..schemas.valunit import ValUnitCreate
-from ..models import valunits
 
 
 def get_all_units(db: Session, limit: int, skip: int = 0):

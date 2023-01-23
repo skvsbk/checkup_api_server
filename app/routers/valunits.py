@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from ..utils import valunits_crud
-from ..models.database import get_db
-from ..schemas.valunit import ValUnitCreate, ValUnitOut
+from app.utils import valunits_crud
+from app.models.database import get_db
+from app.schemas.valunit import ValUnitCreate, ValUnitOut
 
 
 router = APIRouter()

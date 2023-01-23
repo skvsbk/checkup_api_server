@@ -1,7 +1,7 @@
 from sqlalchemy import Column, String, Integer, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
-from ..models.database import Base
-from ..models.roles import RoleDB
+from app.models.database import Base
+from app.models.roles import RoleDB
 
 
 class UserDB(Base):

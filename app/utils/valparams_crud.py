@@ -1,8 +1,7 @@
 from sqlalchemy.orm import Session
+from app.schemas.valparam import ValParamCreate
+from app.models import valparams
 from .base import create_base
-from ..schemas.valparam import ValParamCreate
-from ..models import valparams
-
 
 
 def get_by_unit_id(db: Session, unit_id: int):

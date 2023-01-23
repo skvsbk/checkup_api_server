@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
+from app.schemas.plant import PlantCreate
+from app.models import plants
 from .base import create_base
-from ..schemas.plant import PlantCreate
-from ..models import plants
 
 
 def get_by_facility_id(db: Session, facility_id: int):

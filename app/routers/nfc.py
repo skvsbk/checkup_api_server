@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from ..utils import nfc_crud
-from ..models.database import get_db
-from ..schemas.nfc import NFCTagCreate, NFCTagOut
+from app.utils import nfc_crud
+from app.models.database import get_db
+from app.schemas.nfc import NFCTagCreate, NFCTagOut
 
 
 router = APIRouter()

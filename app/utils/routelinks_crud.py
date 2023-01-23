@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
+from app.schemas.routelink import RouteLinkCreate
+from app.models import routelinks
 from .base import create_base
-from ..schemas.routelink import RouteLinkCreate
-from ..models import routelinks
 
 
 def get_by_route_id(db: Session,  route_id: int):

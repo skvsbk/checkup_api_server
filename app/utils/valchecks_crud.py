@@ -1,7 +1,7 @@
 from sqlalchemy.orm import Session
+from app.schemas.valcheck import ValCheckCreate
+from app.models import valchecks
 from .base import create_base
-from ..schemas.valcheck import ValCheckCreate
-from ..models import valchecks
 
 
 def get_by_check_id(db: Session, check_id: int):

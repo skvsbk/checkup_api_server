@@ -1,8 +1,8 @@
 from sqlalchemy import Column, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
-from ..models.database import Base
-from ..models.valunits import ValUnitsDB
-from ..models.nfc import NfcTagDB
+from app.models.database import Base
+from app.models.valunits import ValUnitsDB
+from app.models.nfc import NfcTagDB
 
 
 class ValParamsDB(Base):
