@@ -1,8 +1,8 @@
 from sqlalchemy import Column, Integer, Boolean, ForeignKey
 from sqlalchemy.orm import relationship
-from ..models.database import Base
-from ..models.routes import RoutesDB
-from ..models.users import UserDB
+from app.models.database import Base
+from app.models.routes import RoutesDB
+from app.models.users import UserDB
 
 
 class CheckupsDB(Base):
