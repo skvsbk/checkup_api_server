@@ -7,10 +7,10 @@ from ..models.users import UserDB
 
 class CheckupsDB(Base):
     __tablename__ = 'checkups'
-    checkup_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     completed = Column(Boolean)
-    route_id = Column(Integer, ForeignKey('routes.route_id'), index=True)
-    user_id = Column(Integer, ForeignKey('users.user_id'), index=True)
+    route_id = Column(Integer, ForeignKey('routes.id'), index=True)
+    user_id = Column(Integer, ForeignKey('users.id'), index=True)
     t_start = Column(Integer)
     t_end = Column(Integer)
 
