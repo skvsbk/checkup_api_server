@@ -8,7 +8,7 @@ class NFCTagBase(BaseModel):
 
 
 class NFCTagOut(NFCTagBase):
-    nfc_id: int
+    id: int
 
     class Config:
         orm_mode = True

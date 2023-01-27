@@ -6,9 +6,9 @@ from app.models.facilities import FacilitiesDB
 
 class RoutesDB(Base):
     __tablename__ = 'routes'
-    route_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String(30))
-    facility_id = Column(Integer, ForeignKey('facilities.facility_id'), index=True)
+    facility_id = Column(Integer, ForeignKey('facilities.id'), index=True)
     active = Column(Boolean)
 
     facilities = relationship('FacilitiesDB', backref='routes')

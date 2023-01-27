@@ -9,7 +9,7 @@ class ValCheckBase(BaseModel):
 
 
 class ValCheckOut(ValCheckBase):
-    valuecheck_id: int
+    id: int
 
     class Config:
         orm_mode = True

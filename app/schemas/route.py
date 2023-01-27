@@ -8,7 +8,7 @@ class RouteBase(BaseModel):
 
 
 class RouteOut(RouteBase):
-    route_id: int
+    id: int
 
     class Config:
         orm_mode = True

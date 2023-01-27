@@ -6,7 +6,7 @@ class RoleBase(BaseModel):
 
 
 class RoleOut(RoleBase):
-    role_id: int
+    id: int
 
     class Config:
         orm_mode = True

@@ -13,7 +13,7 @@ class UserCreate(UserBase):
 
 
 class UserOut(UserBase):
-    user_id: int
+    id: int
     active: bool
 
     class Config:

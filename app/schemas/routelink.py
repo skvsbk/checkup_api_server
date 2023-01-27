@@ -9,7 +9,7 @@ class RouteLinkBase(BaseModel):
 
 
 class RouteLinkOut(RouteLinkBase):
-    routelink_id: int
+    id: int
 
     class Config:
         orm_mode = True

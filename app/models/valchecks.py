@@ -7,10 +7,10 @@ from app.models.valparams import ValParamsDB
 class ValChecksDB(Base):
     __tablename__ = 'val_checks'
 
-    valcheck_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     value = Column(Float)
     note = Column(String(256))
-    param_id = Column(Integer, ForeignKey('val_params.param_id'), index=True)
-    check_id = Column(Integer, ForeignKey('checks.check_id'), index=True)
+    param_id = Column(Integer, ForeignKey('val_params.id'), index=True)
+    check_id = Column(Integer, ForeignKey('checks.id'), index=True)
 
     units = relationship('ValParamsDB', backref='val_checks')

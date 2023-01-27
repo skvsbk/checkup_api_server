@@ -7,7 +7,7 @@ class PlantBase(BaseModel):
 
 
 class PlantOut(PlantBase):
-    plant_id: int
+    id: int
 
     class Config:
         orm_mode = True

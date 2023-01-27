@@ -6,8 +6,8 @@ from app.models.plants import PlantsDB
 
 class NfcTagDB(Base):
     __tablename__ = 'nfc_tag'
-    nfc_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     nfc_serial = Column(String(14))
-    plant_id = Column(Integer, ForeignKey('plants.plant_id'), index=True)
+    plant_id = Column(Integer, ForeignKey('plants.id'), index=True)
 
     plant = relationship('PlantsDB', backref='nfc_tag')

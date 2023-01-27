@@ -8,10 +8,10 @@ from app.models.nfc import NfcTagDB
 class ValParamsDB(Base):
     __tablename__ = 'val_params'
 
-    param_id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String(30))
-    unit_id = Column(Integer, ForeignKey('val_units.unit_id'), index=True)
-    nfc_id = Column(Integer, ForeignKey('nfc_tag.nfc_id'), index=True)
+    unit_id = Column(Integer, ForeignKey('val_units.id'), index=True)
+    nfc_id = Column(Integer, ForeignKey('nfc_tag.id'), index=True)
     min_value = Column(Float)
     max_value = Column(Float)
 
