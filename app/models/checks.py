@@ -8,6 +8,7 @@ class ChecksDB(Base):
     __tablename__ = 'checks'
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     checkup_id = Column(Integer, ForeignKey('checkups.id'), index=True)
+    note = Column(String(255))
     nfc_id = Column(Integer, ForeignKey('nfc_tag.id'), index=True)
     t_check = Column(DateTime)
 

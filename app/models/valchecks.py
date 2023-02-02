@@ -9,7 +9,6 @@ class ValChecksDB(Base):
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     value = Column(Float)
-    note = Column(String(256))
     param_id = Column(Integer, ForeignKey('val_params.id'), index=True)
     check_id = Column(Integer, ForeignKey('checks.id'), index=True)
 

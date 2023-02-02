@@ -11,8 +11,8 @@ class CheckupsDB(Base):
     completed = Column(Boolean)
     route_id = Column(Integer, ForeignKey('routes.id'), index=True)
     user_id = Column(Integer, ForeignKey('users.id'), index=True)
-    t_start = Column(Integer)
-    t_end = Column(Integer)
+    t_start = Column(DateTime)
+    t_end = Column(DateTime)
 
     routes = relationship('RoutesDB', backref='checkups')
     user = relationship('UserDB', backref='checkups')
