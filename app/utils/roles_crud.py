@@ -9,6 +9,6 @@ def get_all(db: Session, limit: int, skip: int = 0):
 
 
 def create_role(db: Session, role: RoleCreate):
-    db_role = roles.RoleDB(name=role.name)
+    db_role = roles.RoleDB(role_name=role.role_name)
     create_base(db, db_role)
     return db_role

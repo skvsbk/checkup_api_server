@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class RoleBase(BaseModel):
-    name: str
+    role_name: str
 
 
 class RoleOut(RoleBase):

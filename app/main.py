@@ -30,9 +30,9 @@ async def startup():
     roles = roles_crud.get_all(db=db, limit=100, skip=0)
     if roles == []:
         # create all roles at first start
-        role_admin = roles_crud.create_role(role=role.RoleCreate(name='admin'), db=db)
-        roles_crud.create_role(role=role.RoleCreate(name='user_webapp'), db=db)
-        roles_crud.create_role(role=role.RoleCreate(name='user_mobapp'), db=db)
+        role_admin = roles_crud.create_role(role=role.RoleCreate(role_name='admin'), db=db)
+        roles_crud.create_role(role=role.RoleCreate(role_name='user_webapp'), db=db)
+        roles_crud.create_role(role=role.RoleCreate(role_name='user_mobapp'), db=db)
 
         # create user 'admin' at first start
         user_db = user.UserCreate(name='admin', login='admin', password='admin', role_id=role_admin.role_id, active=1)
@@ -45,4 +45,4 @@ async def shutdown():
     pass
 
 if __name__ == '__main__':
-    uvicorn.run('main:app', port=8000, host='0.0.0.0', reload=True)
+    uvicorn.run('app.main:app', port=8000, host='0.0.0.0', reload=True)
