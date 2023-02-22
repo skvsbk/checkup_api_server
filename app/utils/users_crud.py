@@ -9,9 +9,10 @@ from .base import create_base
 
 
 def get_user_by_login(db: Session, login: str):
-    res = db.query(users.UserDB.login, users.UserDB.name, users.UserDB.password, roles.RoleDB.role_name).\
+    res = db.query(users.UserDB.id, users.UserDB.login, users.UserDB.name, users.UserDB.password, roles.RoleDB.name.label("role_name")).\
         filter(users.UserDB.login == login, users.UserDB.active == True).join(roles.RoleDB, roles.RoleDB.id == users.UserDB.role_id).first()
 
+    print(res)
     return res
 
 

@@ -2,7 +2,7 @@ from pydantic import BaseModel
 
 
 class RoleBase(BaseModel):
-    role_name: str
+    name: str
 
 
 class RoleOut(RoleBase):
@@ -10,6 +10,7 @@ class RoleOut(RoleBase):
 
     class Config:
         orm_mode = True
+
 
 
 class RoleCreate(RoleBase):

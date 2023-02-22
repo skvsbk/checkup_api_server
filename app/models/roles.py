@@ -5,4 +5,7 @@ from app.models.database import Base
 class RoleDB(Base):
     __tablename__ = 'user_roles'
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    role_name = Column(String(50))
+    name = Column(String(50))
+
+    def __str__(self):
+        return self.name
