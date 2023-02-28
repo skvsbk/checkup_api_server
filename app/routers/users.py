@@ -17,7 +17,7 @@ router = APIRouter()
 @router.get('/{login}', response_model=UserOut)
 def get_user_by_login(login: str, db: Session = Depends(get_db)):
     user = users_crud.get_user_by_login(db=db, login=login)
-    print(user)
+
     if not user:
         raise HTTPException(status_code=200, detail='User not found')
     return user

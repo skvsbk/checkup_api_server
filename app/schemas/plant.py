@@ -12,6 +12,12 @@ class PlantOut(PlantBase):
     class Config:
         orm_mode = True
 
+class PlantByNFCSerialOut(BaseModel):
+    name: str
+
+    class Config:
+        orm_mode = True
+
 
 class PlantCreate(PlantBase):
     pass
