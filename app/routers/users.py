@@ -14,6 +14,14 @@ router = APIRouter()
 #     return users_crud.get_all(db=db, limit=limit, skip=skip)
 
 
+# http://127.0.0.1:8000/users/admin
+# {
+#   "login": "admin",
+#   "name": "admin",
+#   "id": 13,
+#   "password": "c4c2389238c9a6f75849b",
+#   "role_name": "admin"
+# }
 @router.get('/{login}', response_model=UserOut)
 def get_user_by_login(login: str, db: Session = Depends(get_db)):
     user = users_crud.get_user_by_login(db=db, login=login)

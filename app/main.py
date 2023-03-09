@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 import uvicorn
-from app.routers import checks, checkups, facilities, nfc, plants, roles, rolutelinks, routes, users
+from app.routers import checks, checkups, checkup_headers, checkup_details, facilities, nfc, plants, roles, rolutelinks, routes, users
 from app.routers import valchecks, valparams, valunits
 from app.models.database import get_db
 from app.utils import users_crud, roles_crud
@@ -11,6 +11,8 @@ app = FastAPI(title='Electronic journal of inspections')
 
 app.include_router(checks.router, prefix='/checks', tags=['checks'])
 app.include_router(checkups.router, prefix='/checkups', tags=['checkups'])
+app.include_router(checkup_headers.router, prefix='/checkup_headers', tags=['checkup_headers'])
+app.include_router(checkup_details.router, prefix='/checkup_details', tags=['checkup_details'])
 app.include_router(facilities.router, prefix='/facilities', tags=['facilities'])
 app.include_router(nfc.router, prefix='/nfc', tags=['nfc'])
 app.include_router(plants.router, prefix='/plants', tags=['plants'])

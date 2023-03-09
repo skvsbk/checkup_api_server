@@ -5,6 +5,7 @@ from pydantic import BaseModel
 class NFCTagBase(BaseModel):
     nfc_serial: str
     plant_id: int
+    active: bool
 
 
 class NFCTagOut(NFCTagBase):
@@ -16,3 +17,4 @@ class NFCTagOut(NFCTagBase):
 
 class NFCTagCreate(NFCTagBase):
     pass
+

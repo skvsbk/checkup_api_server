@@ -20,6 +20,21 @@ async def get_params_by_nfc_serial(nfc_serial: str, db: Session = Depends(get_db
         raise HTTPException(status_code=200, detail='Params not found')
     return params
 
+
+# http://127.0.0.1:8000/valparams/?facility_id=1
+# [
+#   {
+#     "id": 6,
+#     "name": "Давление на входе",
+#     "min_value": 1,
+#     "max_value": 6,
+#     "unit_name": "bar"
+#   },...
+# ]
+@router.get('/')
+def get_all_params(facility_id: str, db: Session = Depends(get_db)):
+    return valparams_crud.get_all_params(db=db, facility_id=facility_id)
+
 @router.post('/', response_model=ValParamOut | None)
 def create_param(value: ValParamCreate, db: Session = Depends(get_db)):
     return valparams_crud.create_param(db=db, param=value)

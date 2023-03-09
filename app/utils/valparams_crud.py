@@ -21,6 +21,15 @@ def get_params_by_nfc_serial(db: Session, nfc_serial: str):
         filter(nfc.NfcTagDB.nfc_serial == nfc_serial).first()
     return res
 
+
+def get_all_params(db: Session, facility_id: str):
+    """ SELECT * FROM val_params """
+    return db.query(valparams.ValParamsDB.id, valparams.ValParamsDB.name.label("name"), valparams.ValParamsDB.min_value,
+                    valparams.ValParamsDB.max_value, valunits.ValUnitsDB.name.label("unit_name")).\
+        join(valunits.ValUnitsDB, valunits.ValUnitsDB.id == valparams.ValParamsDB.unit_id).\
+        filter(valparams.ValParamsDB.facility_id == facility_id).all()
+
+
 def create_param(db: Session, param: ValParamCreate):
     db_param = valparams.ValParamsDB(name=param.name, unit_id=param.unit_id, nfc_id=param.nfc_id,
                                      min_value=param.min_value, max_value=param.max_value)

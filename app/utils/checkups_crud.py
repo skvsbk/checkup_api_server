@@ -22,3 +22,5 @@ def create_checkup(db: Session, checkup: CheckupCreate):
 #
 # def delete():
 #     return
+def create_checkup_by_user_id(db, checkup_header):
+    return None

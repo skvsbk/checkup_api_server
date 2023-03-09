@@ -8,12 +8,14 @@ from .base import create_base
 #     return db.query(users.UserDB).offset(skip).limit(limit).all()
 
 
+# http://127.0.0.1:8000/users/admin
 def get_user_by_login(db: Session, login: str):
     res = db.query(users.UserDB.id, users.UserDB.login, users.UserDB.name, users.UserDB.password, roles.RoleDB.name.label("role_name")).\
         filter(users.UserDB.login == login, users.UserDB.active == True).join(roles.RoleDB, roles.RoleDB.id == users.UserDB.role_id).first()
     return res
 
 
+# use for first start (todo make hased passwjrd)
 def create_user(db: Session, user: UserCreate):
     # fake_hashed_password = user.password + "notreallyhashed"
     db_user = users.UserDB(login=user.login, password=user.password,

@@ -6,7 +6,7 @@ class ValUnitBase(BaseModel):
 
 
 class ValUnitOut(ValUnitBase):
-    unit_id: int
+    id: int
 
     class Config:
         orm_mode = True

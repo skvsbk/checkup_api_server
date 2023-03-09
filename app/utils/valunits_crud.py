@@ -4,8 +4,8 @@ from app.models import valunits
 from .base import create_base
 
 
-def get_all_units(db: Session, limit: int, skip: int = 0):
-    return db.query(valunits.ValUnitsDB).offset(skip).limit(limit).all()
+def get_all_units(db: Session):
+    return db.query(valunits.ValUnitsDB).all()
 
 
 def create_unit(db: Session, unit: ValUnitCreate):

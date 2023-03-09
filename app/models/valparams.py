@@ -10,6 +10,7 @@ class ValParamsDB(Base):
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String(30))
+    facility_id = Column(Integer, ForeignKey('facilities.id'), index=True)
     unit_id = Column(Integer, ForeignKey('val_units.id'), index=True)
     nfc_id = Column(Integer, ForeignKey('nfc_tag.id'), index=True)
     min_value = Column(Float)
@@ -17,3 +18,4 @@ class ValParamsDB(Base):
 
     units = relationship('ValUnitsDB', backref='val_params')
     nfctag = relationship('NfcTagDB', backref='val_params')
+    facility = relationship('FacilitiesDB', backref='val_params')
