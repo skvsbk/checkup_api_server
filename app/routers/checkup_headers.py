@@ -15,7 +15,7 @@ router = APIRouter()
 #     "user_name": "Иванов И.И.",
 #     "facility_name": "Пушкин",
 #     "route_name": "Маршрут 1",
-#     "time_start": "2023-02-02T15:08:18",
+#     "time_start": "2023-02-02 15:08:18",
 #     "id": 1,
 #     "time_finish": null,
 #     "is_complete": false
