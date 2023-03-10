@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from ..utils import checkup_headers_crud
 from ..models.database import get_db
-from ..schemas.checkup_header import CheckupHeaderCreate, CheckupHeaderOut
+from ..schemas.checkup_header import CheckupHeaderCreate, CheckupHeaderOut, CheckupHeaderUpdate
 
 
 router = APIRouter()
@@ -57,3 +57,8 @@ async def get_count_checkup_by_user_id(user_id: int, db: Session = Depends(get_d
 @router.post('/', response_model=CheckupHeaderOut)
 def create_checkup_by_user_id(value: CheckupHeaderCreate, db: Session = Depends(get_db)):
     return checkup_headers_crud.create_checkup_by_user_id(db=db, header=value)
+
+
+@router.put('/{checkup_headers_id}')
+def update_checkup_header_for_id(checkup_headers_id: int, value: CheckupHeaderUpdate, db: Session = Depends(get_db)):
+    return checkup_headers_crud.update_checkup_header_for_id(db=db, checkup_headers_id=checkup_headers_id, value=value)

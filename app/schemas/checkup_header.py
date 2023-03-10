@@ -27,3 +27,8 @@ class CheckupHeaderCreate(CheckupHeaderBase):
     route_id: int
     time_finish: Optional[datetime] = None
     is_complete: bool = False
+
+
+class CheckupHeaderUpdate(BaseModel):
+    time_finish: datetime
+    is_complete: bool

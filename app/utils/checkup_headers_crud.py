@@ -1,6 +1,7 @@
 from sqlalchemy.orm import Session
+from sqlalchemy import desc
 from .base import create_base
-from ..schemas.checkup_header import CheckupHeaderCreate
+from ..schemas.checkup_header import CheckupHeaderCreate, CheckupHeaderUpdate
 from ..models import checkup_headers
 
 
@@ -18,7 +19,7 @@ def get_last_checkup_by_user_id(db: Session,  user_id: int, limit: int):
     """
     return db.query(checkup_headers.CheckupHeadersDB).\
         filter(checkup_headers.CheckupHeadersDB.user_id == user_id).\
-        order_by(checkup_headers.CheckupHeadersDB.time_start).limit(limit).all()
+        order_by(desc(checkup_headers.CheckupHeadersDB.time_start)).limit(limit).all()
 
 def get_total_checkup_by_user_id(db: Session, user_id: int):
     """
@@ -64,6 +65,11 @@ def create_checkup_by_user_id(db: Session, header: CheckupHeaderCreate):
     return db_checkup_header
 
 
-# def update():
-#     return
-
+def update_checkup_header_for_id(db: Session, checkup_headers_id: int,  value: CheckupHeaderUpdate):
+    try:
+        db.query(checkup_headers.CheckupHeadersDB).filter(checkup_headers.CheckupHeadersDB.id == checkup_headers_id).\
+        update({"time_finish": value.time_finish, "is_complete": value.is_complete})
+        db.commit()
+        return {"detail": "success"}
+    except:
+        return {"detail": "fail"}
