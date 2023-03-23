@@ -13,11 +13,28 @@ class PlantOut(PlantBase):
         orm_mode = True
 
 class PlantByNFCSerialOut(BaseModel):
-    name: str
+    plant_name: str
+    facility_name: str
 
     class Config:
         orm_mode = True
 
+class PlantByFacilityIdOut(BaseModel):
+    plant_name: str
+    nfc_serial: str | None
+    active: bool | None
+
+    class Config:
+        orm_mode = True
+
+class PlantForFreeOut(BaseModel):
+    id: int
+    name: str
+    nfc_serial: str | None
+
+
+    class Config:
+        orm_mode = True
 
 class PlantCreate(PlantBase):
     pass

@@ -1,13 +1,14 @@
 from sqlalchemy.orm import Session
 from sqlalchemy import desc
 from .base import create_base
-from ..schemas.checkup_header import CheckupHeaderCreate, CheckupHeaderUpdate
-from ..models import checkup_headers
+from app.schemas.checkup_header import CheckupHeaderCreate, CheckupHeaderUpdate
+from app.models import checkup_headers
 
 
 
 def get_checkup_by_user_id(db: Session,  user_id: int):
-    return db.query(checkup_headers.CheckupHeadersDB).filter(checkup_headers.CheckupHeadersDB.user_id == user_id).all()
+    res = db.query(checkup_headers.CheckupHeadersDB).filter(checkup_headers.CheckupHeadersDB.user_id == user_id).all()
+    return res
 
 
 def get_last_checkup_by_user_id(db: Session,  user_id: int, limit: int):
@@ -39,6 +40,7 @@ def get_done_or_not_checkup_by_user_id(db: Session, user_id: int, is_complete: b
         filter(checkup_headers.CheckupHeadersDB.user_id == user_id,
                checkup_headers.CheckupHeadersDB.is_complete == is_complete).count()
 
+
 """
 {
   "user_id": 18,
@@ -58,7 +60,7 @@ def create_checkup_by_user_id(db: Session, header: CheckupHeaderCreate):
                                                          route_id=header.route_id,
                                                          route_name=header.route_name,
                                                          time_start=header.time_start,
-                                                         time_finish=header.time_finish,
+                                                         time_finish=None,
                                                          is_complete=header.is_complete)
 
     create_base(db, db_checkup_header)

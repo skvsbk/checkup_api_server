@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from pydantic import BaseModel, validator
 
 
@@ -5,10 +7,11 @@ class CheckBase(BaseModel):
     note: str
     checkup_id: int
     nfc_id: int
+    t_check: datetime
 
 
 class CheckOut(CheckBase):
-    check_id: int
+    id: int
 
     class Config:
         orm_mode = True

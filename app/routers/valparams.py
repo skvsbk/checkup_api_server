@@ -13,12 +13,12 @@ router = APIRouter()
 # async def get_by_unit_id(unit_id: int, db: Session = Depends(get_db)):
 #     return valparams_crud.get_by_unit_id(db=db, unit_id=unit_id)
 
-@router.get('/nfc_serial/{nfc_serial}')
+@router.get('/nfc_serial/{nfc_serial}', response_model=ValParamOut)
 async def get_params_by_nfc_serial(nfc_serial: str, db: Session = Depends(get_db)):
-    params = valparams_crud.get_params_by_nfc_serial(db=db, nfc_serial=nfc_serial)
-    if not params:
+    res = valparams_crud.get_params_by_nfc_serial(db=db, nfc_serial=nfc_serial)
+    if not res:
         raise HTTPException(status_code=200, detail='Params not found')
-    return params
+    return res
 
 
 # http://127.0.0.1:8000/valparams/?facility_id=1
@@ -31,7 +31,7 @@ async def get_params_by_nfc_serial(nfc_serial: str, db: Session = Depends(get_db
 #     "unit_name": "bar"
 #   },...
 # ]
-@router.get('/')
+@router.get('/', response_model=list[ValParamOut])
 def get_all_params(facility_id: str, db: Session = Depends(get_db)):
     return valparams_crud.get_all_params(db=db, facility_id=facility_id)
 

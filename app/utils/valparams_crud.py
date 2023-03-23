@@ -15,7 +15,8 @@ def get_params_by_nfc_serial(db: Session, nfc_serial: str):
     JOIN val_units ON val_units.id = val_params.unit_id
     WHERE nfc_tag.nfc_serial = "53E9DC63200001"
     """
-    res = db.query(valparams.ValParamsDB.name.label("name"), valparams.ValParamsDB.min_value, valparams.ValParamsDB.max_value, valunits.ValUnitsDB.name.label("unit")).\
+    res = db.query(valparams.ValParamsDB.id, valparams.ValParamsDB.name.label("name"), valparams.ValParamsDB.min_value,
+                   valparams.ValParamsDB.max_value, valunits.ValUnitsDB.name.label("unit_name")).\
         join(nfc.NfcTagDB, nfc.NfcTagDB.id == valparams.ValParamsDB.nfc_id).\
         join(valunits.ValUnitsDB, valunits.ValUnitsDB.id == valparams.ValParamsDB.unit_id).\
         filter(nfc.NfcTagDB.nfc_serial == nfc_serial).first()
@@ -24,10 +25,11 @@ def get_params_by_nfc_serial(db: Session, nfc_serial: str):
 
 def get_all_params(db: Session, facility_id: str):
     """ SELECT * FROM val_params """
-    return db.query(valparams.ValParamsDB.id, valparams.ValParamsDB.name.label("name"), valparams.ValParamsDB.min_value,
+    res = db.query(valparams.ValParamsDB.id, valparams.ValParamsDB.name.label("name"), valparams.ValParamsDB.min_value,
                     valparams.ValParamsDB.max_value, valunits.ValUnitsDB.name.label("unit_name")).\
         join(valunits.ValUnitsDB, valunits.ValUnitsDB.id == valparams.ValParamsDB.unit_id).\
         filter(valparams.ValParamsDB.facility_id == facility_id).all()
+    return res
 
 
 def create_param(db: Session, param: ValParamCreate):

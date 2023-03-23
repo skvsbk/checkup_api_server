@@ -5,7 +5,7 @@ from ..models import checkups
 
 
 def get_checkup_by_id(db: Session,  checkup_id: int):
-    return db.query(checkups.CheckupsDB).filter(checkups.CheckupsDB.checkup_id == checkup_id).first()
+    return db.query(checkups.CheckupsDB).filter(checkups.CheckupsDB.id == checkup_id).first()
 
 
 def create_checkup(db: Session, checkup: CheckupCreate):

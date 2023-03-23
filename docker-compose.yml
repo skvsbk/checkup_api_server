@@ -18,17 +18,41 @@ services:
       - 53000:3306
     volumes:
       - /var/lib/mysql/docker/api_server:/var/lib/mysql
+    networks:
+      - app-network
 
   phpmyadmin:
     image: phpmyadmin
+    container_name: checkup_phpmyadmin
     restart: always
     ports:
       - 8081:80
     environment:
       - PMA_ARBITRARY=1
+    depends_on:
+      - db
+    networks:
+      - app-network
 
-#  checkup:
-#    image: checkup_api
-#    restart: always
-#    ports:
-#      - 8085:8000
+
+  checkup:
+    image: checkup_api
+#    build: .
+    container_name: checkup_api
+    links:
+      - db
+    volumes:
+      - ./app:/app
+    command: ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - 8085:8000
+    depends_on:
+      - db
+    networks:
+      - app-network
+#
+##Docker Networks
+networks:
+  app-network:
+#    driver: bridge
+#    external: true

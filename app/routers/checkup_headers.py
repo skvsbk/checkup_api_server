@@ -21,9 +21,10 @@ router = APIRouter()
 #     "is_complete": false
 #   },...
 # ]
-@router.get('/', response_model=list[CheckupHeaderOut])
+@router.get('/') #, response_model=list[CheckupHeaderOut])
 async def get_checkup_by_user_id(user_id: int, db: Session = Depends(get_db)):
-    return checkup_headers_crud.get_checkup_by_user_id(db=db, user_id=user_id)
+    res = checkup_headers_crud.get_checkup_by_user_id(db=db, user_id=user_id)
+    return res
 
 
 # http://0.0.0.0:8000/checkup_headers/last?user_id=18&limit=3

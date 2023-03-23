@@ -1,8 +1,10 @@
+import json
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.utils import plants_crud
 from app.models.database import get_db
-from app.schemas.plant import PlantCreate, PlantOut, PlantByNFCSerialOut
+from app.schemas.plant import PlantCreate, PlantOut, PlantByNFCSerialOut, PlantByFacilityIdOut, PlantForFreeOut
 
 
 router = APIRouter()
@@ -21,16 +23,17 @@ router = APIRouter()
 #   },....
 # ]
 # @router.get('/facility_id/{facility_id}', response_model=list[PlantOut])
-@router.get('/')
+@router.get('/', response_model=list[PlantByFacilityIdOut])
 def get_plants_by_facility_id(facility_id: int, db: Session = Depends(get_db)):
-    plants = plants_crud.get_plants_by_facility_id(db=db, facility_id=facility_id)
+    res = plants_crud.get_plants_by_facility_id(db=db, facility_id=facility_id)
     # if not plants:
     #     raise HTTPException(status_code=200, detail='Plants not found')
-    return plants
+
+    return res
 
 
 
-@router.get('/nfc_serial/{nfc_serial}')
+@router.get('/nfc_serial/{nfc_serial}', response_model=PlantByNFCSerialOut)
 def get_plant_by_nfc_serial( nfc_serial: str, db: Session = Depends(get_db)):
     plant = plants_crud.get_plant_by_nfc_serial(db=db, nfc_serial=nfc_serial)
     if not plant:
@@ -45,7 +48,7 @@ def get_plant_by_nfc_serial( nfc_serial: str, db: Session = Depends(get_db)):
 #   "name": "1.004",
 #   "id": 3
 # }
-@router.get('/name/{plant_name}')
+@router.get('/name/{plant_name}', response_model=PlantOut)
 def get_plant_by_name(plant_name: str, facility_id: int, db: Session = Depends(get_db)):
     plant = plants_crud.get_plant_by_name(db=db, plant_name=plant_name, facility_id=facility_id)
     if not plant:
@@ -65,7 +68,7 @@ def get_plant_by_name(plant_name: str, facility_id: int, db: Session = Depends(g
 #     "nfc_serial": "53E9DC63200001"
 #   },...
 # ]
-@router.get('/free')
+@router.get('/free', response_model=list[PlantForFreeOut])
 def get_plant_for_free(facility_id: str, db: Session = Depends(get_db)):
     plants = plants_crud.get_plant_for_free(db=db, facility_id=facility_id)
     return plants
@@ -78,5 +81,5 @@ def get_plant_for_free(facility_id: str, db: Session = Depends(get_db)):
 #   "id": 31
 # }
 @router.post('/') #, response_model=PlantOut)
-def create_plant(plant_name: str, facility_id: int,  db: Session = Depends(get_db)): #(value: PlantCreate, db: Session = Depends(get_db)):
-    return plants_crud.create_plant(db=db, plant_name=plant_name, facility_id=facility_id)
+def create_plant(value: PlantCreate,  db: Session = Depends(get_db)): #(value: PlantCreate, db: Session = Depends(get_db)):
+    return plants_crud.create_plant(db=db, plant=value)

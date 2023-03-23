@@ -12,7 +12,8 @@ def get_plants_by_facility_id(db: Session, facility_id: int):
     JOIN nfc_tag ON nfc_tag.plant_id = plants.id
     WHERE plants.facility_id = 1
     """
-    res = db.query(plants.PlantsDB.name.label("plant_name"), nfc.NfcTagDB.nfc_serial, nfc.NfcTagDB.active). \
+    res = db.query(plants.PlantsDB.name.label("plant_name"), nfc.NfcTagDB.nfc_serial.label("nfc_serial"),
+                   nfc.NfcTagDB.active.label("active")). \
         outerjoin(nfc.NfcTagDB, nfc.NfcTagDB.plant_id == plants.PlantsDB.id). \
         filter(plants.PlantsDB.facility_id == facility_id).order_by(plants.PlantsDB.name).all()
     return res
@@ -26,7 +27,7 @@ def get_plant_by_nfc_serial(db: Session, nfc_serial: str):
     WHERE nfc_tag.nfc_serial = "53E9DC63200001" AND nfc_tag.active = 1
     """
     # todo: add facility_id from request
-    return db.query(plants.PlantsDB.name, facilities.FacilitiesDB.name.label('facility')). \
+    return db.query(plants.PlantsDB.name.label('plant_name'), facilities.FacilitiesDB.name.label('facility_name')). \
         join(nfc.NfcTagDB, nfc.NfcTagDB.plant_id == plants.PlantsDB.id). \
         join(facilities.FacilitiesDB, facilities.FacilitiesDB.id == plants.PlantsDB.facility_id). \
         filter(nfc.NfcTagDB.nfc_serial == nfc_serial). \
@@ -46,10 +47,18 @@ def get_plant_by_name(db: Session, plant_name: str, facility_id: int):
     return res
 
 
-# save to DB (http://127.0.0.1:8000/plants/?plant_name=1.012&facility_id=1)
-def create_plant(db: Session, plant_name, facility_id):  # , plant: PlantCreate):
-    db_plant = plants.PlantsDB(name=plant_name,
-                               facility_id=facility_id)  # (name=plant.name, facility_id=plant.facility_id)
+# save to DB (http://127.0.0.1:8000/plants/)
+"""
+{
+  "name": "string",
+  "facility_id": 2
+}
+"""
+
+
+def create_plant(db: Session, plant: PlantCreate):
+    db_plant = plants.PlantsDB(name=plant.name,
+                               facility_id=plant.facility_id)  # (name=plant.name, facility_id=plant.facility_id)
     create_base(db, db_plant)
     return db_plant
 
@@ -64,7 +73,7 @@ def get_plant_for_free(db: Session, facility_id: str):
     """
     res = db.query(plants.PlantsDB.id, plants.PlantsDB.name, nfc.NfcTagDB.nfc_serial). \
         outerjoin(nfc.NfcTagDB, nfc.NfcTagDB.plant_id == plants.PlantsDB.id). \
-        filter(plants.PlantsDB.facility_id == facility_id).filter(or_(nfc.NfcTagDB.id == None, nfc.NfcTagDB.active == False)).\
+        filter(plants.PlantsDB.facility_id == facility_id).filter(
+        or_(nfc.NfcTagDB.id == None, nfc.NfcTagDB.active == False)). \
         order_by(plants.PlantsDB.name).all()
     return res
-
