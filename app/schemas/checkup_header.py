@@ -12,7 +12,6 @@ class CheckupHeaderBase(BaseModel):
     time_start: datetime
 
 
-
 class CheckupHeaderOut(CheckupHeaderBase):
     id: int
     time_finish: datetime | None

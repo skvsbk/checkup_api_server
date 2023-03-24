@@ -1,5 +1,3 @@
-import json
-
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.utils import plants_crud
@@ -8,6 +6,7 @@ from app.schemas.plant import PlantCreate, PlantOut, PlantByNFCSerialOut, PlantB
 
 
 router = APIRouter()
+
 
 # for listView (http://127.0.0.1:8000/plants/?facility_id=1)
 # [
@@ -32,14 +31,12 @@ def get_plants_by_facility_id(facility_id: int, db: Session = Depends(get_db)):
     return res
 
 
-
 @router.get('/nfc_serial/{nfc_serial}', response_model=PlantByNFCSerialOut)
-def get_plant_by_nfc_serial( nfc_serial: str, db: Session = Depends(get_db)):
+def get_plant_by_nfc_serial(nfc_serial: str, db: Session = Depends(get_db)):
     plant = plants_crud.get_plant_by_nfc_serial(db=db, nfc_serial=nfc_serial)
     if not plant:
         raise HTTPException(status_code=200, detail='Plant not found')
     return plant
-
 
 
 # check unique name (http://127.0.0.1:8000/plants/name/1.004?facility_id=1)
@@ -54,6 +51,7 @@ def get_plant_by_name(plant_name: str, facility_id: int, db: Session = Depends(g
     if not plant:
         raise HTTPException(status_code=200, detail='Plant not found')
     return plant
+
 
 # Get free plants http://127.0.0.1:8000/plants/free?facility_id=1
 # [
@@ -80,6 +78,6 @@ def get_plant_for_free(facility_id: str, db: Session = Depends(get_db)):
 #   "facility_id": 1,
 #   "id": 31
 # }
-@router.post('/') #, response_model=PlantOut)
-def create_plant(value: PlantCreate,  db: Session = Depends(get_db)): #(value: PlantCreate, db: Session = Depends(get_db)):
+@router.post('/')
+def create_plant(value: PlantCreate,  db: Session = Depends(get_db)):
     return plants_crud.create_plant(db=db, plant=value)

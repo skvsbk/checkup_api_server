@@ -1,7 +1,6 @@
 from datetime import datetime
-
 from pydantic import BaseModel
-from pydantic.class_validators import Optional
+
 
 class CheckupDetailBase(BaseModel):
     header_id: int
@@ -18,14 +17,16 @@ class CheckupDetailOut(CheckupDetailBase):
     val_max: float | None
     unit_name: str | None
     val_fact: float | None
+    note: str | None
 
     class Config:
         orm_mode = True
 
 
 class CheckupDetailCreate(CheckupDetailBase):
-    val_name: str = None
-    val_min: float = None
-    val_max: float = None
-    unit_name: str = None
-    val_fact: float = None
+    val_name: str | None = None
+    val_min: float | None = None
+    val_max: float | None = None
+    unit_name: str | None = None
+    val_fact: float | None = None
+    note: str | None = None

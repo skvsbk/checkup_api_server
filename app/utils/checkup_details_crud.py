@@ -4,10 +4,9 @@ from ..schemas.checkup_detail import CheckupDetailCreate
 from ..models import checkup_details
 
 
-
 def get_checkup_details_by_header_id(db: Session,  header_id: int):
-    return db.query(checkup_details.CheckupDetailsDB).filter(checkup_details.CheckupDetailsDB.header_id == header_id).all()
-
+    return db.query(checkup_details.CheckupDetailsDB).\
+        filter(checkup_details.CheckupDetailsDB.header_id == header_id).all()
 
 
 def create_checkup_details(db: Session, details: CheckupDetailCreate):
@@ -20,9 +19,8 @@ def create_checkup_details(db: Session, details: CheckupDetailCreate):
                                                           val_min=details.val_min,
                                                           val_max=details.val_max,
                                                           unit_name=details.unit_name,
-                                                          val_fact=details.val_fact)
+                                                          val_fact=details.val_fact,
+                                                          note=details.note)
 
     create_base(db, db_checkup_details)
     return db_checkup_details
-
-

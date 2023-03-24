@@ -4,10 +4,9 @@ from app.models.database import get_db
 from app.schemas.facility import FacilityOut, FacilityOutAll
 from app.utils import facilities_crud
 
-from fastapi.responses import JSONResponse
-from fastapi.encoders import jsonable_encoder
 
 router = APIRouter()
+
 
 # http://127.0.0.1:8000/facilities/?limit=100&skip=0
 # [
@@ -34,7 +33,3 @@ async def get_facility(limit: int = 100, skip: int = 0, db: Session = Depends(ge
 async def get_facility_by_name(facility_name: str, db: Session = Depends(get_db)):
     facility = facilities_crud.get_facility_by_name(db=db, facility_name=facility_name)
     return facility
-
-# @router.post('/', response_model=FacilityOut)
-# def create(value: FacilityCreate, db: Session = Depends(get_db)):
-#     return facilities_crud.create(db=db, facility=value)

@@ -19,7 +19,6 @@ class RouteLinkOut(BaseModel):
     val_max: float | None
     unit_name: str | None
 
-
     class Config:
         orm_mode = True
 

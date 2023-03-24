@@ -39,4 +39,3 @@ def get_nfc_for_plant(nfc_serial: str, facility_id: int, db: Session = Depends(g
 @router.post('/', response_model=NFCTagOut)
 def create_nfc(value: NFCTagCreate, db: Session = Depends(get_db)):
     return nfc_crud.create_nfc(db=db, value=value)
-

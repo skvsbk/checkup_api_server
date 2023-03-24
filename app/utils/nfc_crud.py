@@ -39,10 +39,3 @@ def get_nfc_for_plant(db: Session, nfc_serial: str, facility_id: int):
                nfc.NfcTagDB.nfc_serial == nfc_serial,
                nfc.NfcTagDB.active == True).first()
     return res
-
-# def update():
-#     return
-#
-#
-# def delete():
-#     return

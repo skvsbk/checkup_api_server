@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 import uvicorn
-from app.routers import checks, checkups, checkup_headers, checkup_details, facilities, nfc, plants, roles, rolutelinks, routes, users
-from app.routers import valchecks, valparams, valunits
+from app.routers import checkup_headers, checkup_details, facilities, nfc, plants, roles, rolutelinks, routes, users
+from app.routers import valparams
 from app.models.database import get_db
 from app.utils import users_crud, roles_crud
 from app.schemas import role, user
@@ -9,8 +9,7 @@ from app.schemas import role, user
 
 app = FastAPI(title='Electronic journal of inspections')
 
-app.include_router(checks.router, prefix='/checks', tags=['checks'])
-app.include_router(checkups.router, prefix='/checkups', tags=['checkups'])
+
 app.include_router(checkup_headers.router, prefix='/checkup_headers', tags=['checkup_headers'])
 app.include_router(checkup_details.router, prefix='/checkup_details', tags=['checkup_details'])
 app.include_router(facilities.router, prefix='/facilities', tags=['facilities'])
@@ -20,17 +19,15 @@ app.include_router(roles.router, prefix='/roles', tags=['roles'])
 app.include_router(rolutelinks.router, prefix='/rolutelinks', tags=['rolutelinks'])
 app.include_router(routes.router, prefix='/routes', tags=['routes'])
 app.include_router(users.router, prefix='/users', tags=['users'])
-app.include_router(valchecks.router, prefix='/valchecks', tags=['valchecks'])
 app.include_router(valparams.router, prefix='/valparams', tags=['valparams'])
-app.include_router(valunits.router, prefix='/valunits', tags=['valunits'])
 
 
 @app.on_event('startup')
 async def startup():
 
     db = get_db().__next__()
-    roles = roles_crud.get_all(db=db, limit=100, skip=0)
-    if roles == []:
+    roles_for_app = roles_crud.get_all(db=db, limit=100, skip=0)
+    if len(roles_for_app) == 0:
         # create all roles at first start
         role_admin = roles_crud.create_role(role=role.RoleCreate(role_name='admin'), db=db)
         roles_crud.create_role(role=role.RoleCreate(role_name='user_webapp'), db=db)

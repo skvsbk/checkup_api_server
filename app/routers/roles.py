@@ -21,8 +21,3 @@ router = APIRouter()
 @router.get('/{role_name}', response_model=RoleOut)
 def get_role_id(role_name: str, db: Session = Depends(get_db)):
     return roles_crud.get_role_id(db=db, role_name=role_name)
-
-
-# @router.post('/', response_model=RoleOut)
-# def create_role(value: RoleCreate, db: Session = Depends(get_db)):
-#     return roles_crud.create_role(db=db, role=value.name)

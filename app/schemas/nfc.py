@@ -1,4 +1,3 @@
-
 from pydantic import BaseModel
 
 
@@ -14,15 +13,15 @@ class NFCTagOut(NFCTagBase):
     class Config:
         orm_mode = True
 
-class NFCTagForPlantOut(BaseModel):
-      nfc_id: int
-      nfc_active: bool
-      plant_name: str
 
-      class Config:
+class NFCTagForPlantOut(BaseModel):
+    nfc_id: int
+    nfc_active: bool
+    plant_name: str
+
+    class Config:
         orm_mode = True
 
 
 class NFCTagCreate(NFCTagBase):
     pass
-

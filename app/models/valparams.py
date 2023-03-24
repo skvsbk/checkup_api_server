@@ -2,7 +2,8 @@ from sqlalchemy import Column, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from app.models.database import Base
 from app.models.valunits import ValUnitsDB
-from app.models.nfc import NfcTagDB
+from app.models.plants import PlantsDB
+from app.models.facilities import FacilitiesDB
 
 
 class ValParamsDB(Base):
@@ -12,10 +13,10 @@ class ValParamsDB(Base):
     name = Column(String(30))
     facility_id = Column(Integer, ForeignKey('facilities.id'), index=True)
     unit_id = Column(Integer, ForeignKey('val_units.id'), index=True)
-    nfc_id = Column(Integer, ForeignKey('nfc_tag.id'), index=True)
+    plant_id = Column(Integer, ForeignKey('plants.id'), index=True)
     min_value = Column(Float)
     max_value = Column(Float)
 
     units = relationship('ValUnitsDB', backref='val_params')
-    nfctag = relationship('NfcTagDB', backref='val_params')
+    plants = relationship('PlantsDB', backref='val_params')
     facility = relationship('FacilitiesDB', backref='val_params')

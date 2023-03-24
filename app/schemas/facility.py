@@ -12,9 +12,11 @@ class FacilityOut(FacilityBase):
     class Config:
         orm_mode = True
 
+
 class FacilityOutAll(FacilityBase):
     class Config:
         orm_mode = True
+
 
 class FacilityCreate(FacilityBase):
     pass

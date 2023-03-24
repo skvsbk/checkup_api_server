@@ -21,7 +21,7 @@ router = APIRouter()
 #     "is_complete": false
 #   },...
 # ]
-@router.get('/') #, response_model=list[CheckupHeaderOut])
+@router.get('/')
 async def get_checkup_by_user_id(user_id: int, db: Session = Depends(get_db)):
     res = checkup_headers_crud.get_checkup_by_user_id(db=db, user_id=user_id)
     return res
@@ -60,6 +60,11 @@ def create_checkup_by_user_id(value: CheckupHeaderCreate, db: Session = Depends(
     return checkup_headers_crud.create_checkup_by_user_id(db=db, header=value)
 
 
+# http://0.0.0.0:8000/checkup_headers/277
+# {
+#   "time_finish": "2023-03-24T09:28:06.742Z",
+#   "is_complete": true
+# }
 @router.put('/{checkup_headers_id}')
 def update_checkup_header_for_id(checkup_headers_id: int, value: CheckupHeaderUpdate, db: Session = Depends(get_db)):
     return checkup_headers_crud.update_checkup_header_for_id(db=db, checkup_headers_id=checkup_headers_id, value=value)

@@ -9,11 +9,6 @@ from app.schemas.user import UserOut
 router = APIRouter()
 
 
-# @router.get('/', response_model=list[UserOut])
-# def get_users(limit: int = 100, skip: int = 0, db: Session = Depends(get_db)):
-#     return users_crud.get_all(db=db, limit=limit, skip=skip)
-
-
 # http://127.0.0.1:8000/users/admin
 # {
 #   "login": "admin",
@@ -29,11 +24,3 @@ def get_user_by_login(login: str, db: Session = Depends(get_db)):
     if not user:
         raise HTTPException(status_code=200, detail='User not found')
     return user
-
-
-# @router.post('/', response_model=UserOut)
-# def create_user(value: UserCreate, db: Session = Depends(get_db)):
-#     db_user = users_crud.get_user_by_login(db=db, login=value.login)
-#     if db_user:
-#         raise HTTPException(status_code=400, detail='User login already registered')
-#     return users_crud.create_user(db=db, user=value)

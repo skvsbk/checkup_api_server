@@ -17,5 +17,6 @@ class CheckupDetailsDB(Base):
     unit_name = Column(String(30))
     val_fact = Column(Float)
     time_check = Column(DateTime)
+    note = Column(String(150))
 
     checkup_header = relationship('CheckupHeadersDB')

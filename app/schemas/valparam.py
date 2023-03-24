@@ -9,7 +9,6 @@ class ValParamBase(BaseModel):
     max_value: float
 
 
-
 class ValParamOut(BaseModel):
     id: int
     name: str
@@ -19,6 +18,7 @@ class ValParamOut(BaseModel):
 
     class Config:
         orm_mode = True
+
 
 class ValParamCreate(ValParamBase):
     pass

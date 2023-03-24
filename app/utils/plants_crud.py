@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from sqlalchemy import or_, and_
+from sqlalchemy import or_
 from app.schemas.plant import PlantCreate
 from app.models import plants, nfc, facilities
 from .base import create_base
@@ -47,18 +47,10 @@ def get_plant_by_name(db: Session, plant_name: str, facility_id: int):
     return res
 
 
-# save to DB (http://127.0.0.1:8000/plants/)
-"""
-{
-  "name": "string",
-  "facility_id": 2
-}
-"""
-
-
+# save to DB (http://127.0.0.1:8000/plants/?plant_name=1.012&facility_id=1)
 def create_plant(db: Session, plant: PlantCreate):
     db_plant = plants.PlantsDB(name=plant.name,
-                               facility_id=plant.facility_id)  # (name=plant.name, facility_id=plant.facility_id)
+                               facility_id=plant.facility_id)
     create_base(db, db_plant)
     return db_plant
 
