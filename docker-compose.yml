@@ -21,21 +21,21 @@ services:
     networks:
       - app-network
 
-  phpmyadmin:
-    image: phpmyadmin
-    container_name: checkup_phpmyadmin
-    restart: always
-    ports:
-      - 8081:80
-    environment:
-      - PMA_ARBITRARY=1
-    depends_on:
-      - db
-    networks:
-      - app-network
+#  phpmyadmin:
+#    image: phpmyadmin
+#    container_name: checkup_phpmyadmin
+#    restart: always
+#    ports:
+#      - 8081:80
+#    environment:
+#      - PMA_ARBITRARY=1
+#    depends_on:
+#      - db
+#    networks:
+#      - app-network
 
 
-  checkup:
+  checkup_api:
     image: checkup_api
 #    build: .
     container_name: checkup_api
@@ -48,6 +48,19 @@ services:
       - 8085:8000
     depends_on:
       - db
+    networks:
+      - app-network
+
+  checkup_web:
+    image: checkup_web
+#    build: .
+    container_name: checkup_web
+    links:
+      - db
+    restart: on-failure
+    command: ["gunicorn", "run:app", "-b", "0.0.0.0:5000", "--reload"]
+    ports:
+      - 8090:5000
     networks:
       - app-network
 #
