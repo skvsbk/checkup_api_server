@@ -1,3 +1,5 @@
+import hashlib
+
 from fastapi import FastAPI
 import uvicorn
 from app.routers import checkup_headers, checkup_details, facilities, nfc, plants, roles, rolutelinks, routes, users
@@ -29,12 +31,13 @@ async def startup():
     roles_for_app = roles_crud.get_all(db=db, limit=100, skip=0)
     if len(roles_for_app) == 0:
         # create all roles at first start
-        role_admin = roles_crud.create_role(role=role.RoleCreate(role_name='admin'), db=db)
-        roles_crud.create_role(role=role.RoleCreate(role_name='user_webapp'), db=db)
-        roles_crud.create_role(role=role.RoleCreate(role_name='user_mobapp'), db=db)
+        role_admin = roles_crud.create_role(role=role.RoleCreate(name='admin'), db=db)
+        roles_crud.create_role(role=role.RoleCreate(name='user_webapp'), db=db)
+        roles_crud.create_role(role=role.RoleCreate(name='user_mobapp'), db=db)
 
         # create user 'admin' at first start
-        user_db = user.UserCreate(name='admin', login='admin', password='admin', role_id=role_admin.role_id, active=1)
+        admin_password = hashlib.md5("admin".encode('utf-8')).hexdigest()
+        user_db = user.UserCreate(name='admin', login='admin', password=admin_password, role_id=role_admin.id, active=1)
         users_crud.create_user(user=user_db, db=db)
 
 

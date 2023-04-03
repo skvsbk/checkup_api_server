@@ -13,6 +13,8 @@ class RouteLinkOut(BaseModel):
     order: int
     nfc_serial: str
     plant_name: str | None
+    plant_description: str | None
+    plant_description_params: str | None
     plant_id: int | None
     val_name: str | None
     val_min: float | None

@@ -11,6 +11,8 @@ class CheckupDetailsDB(Base):
     nfc_serial = Column(String(14))
     plant_id = Column(Integer)
     plant_name = Column(String(30))
+    plant_description = Column(String(150))
+    plant_description_params = Column(String(150))
     val_name = Column(String(30))
     val_min = Column(Float)
     val_max = Column(Float)

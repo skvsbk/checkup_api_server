@@ -14,6 +14,8 @@ def create_checkup_details(db: Session, details: CheckupDetailCreate):
                                                           nfc_serial=details.nfc_serial,
                                                           plant_id=details.plant_id,
                                                           plant_name=details.plant_name,
+                                                          plant_description=details.plant_description,
+                                                          plant_description_params=details.plant_description_params,
                                                           val_name=details.val_name,
                                                           time_check=details.time_check,
                                                           val_min=details.val_min,

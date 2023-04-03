@@ -7,6 +7,8 @@ class CheckupDetailBase(BaseModel):
     nfc_serial: str
     plant_id: int
     plant_name: str
+    plant_description: str
+    plant_description_params: str
     time_check: datetime
 
 

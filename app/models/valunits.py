@@ -6,4 +6,4 @@ class ValUnitsDB(Base):
     __tablename__ = 'val_units'
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    name = Column(String(10))
+    name = Column(String(50))

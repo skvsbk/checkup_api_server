@@ -10,7 +10,7 @@ class ValParamsDB(Base):
     __tablename__ = 'val_params'
 
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    name = Column(String(30))
+    name = Column(String(50))
     facility_id = Column(Integer, ForeignKey('facilities.id'), index=True)
     unit_id = Column(Integer, ForeignKey('val_units.id'), index=True)
     plant_id = Column(Integer, ForeignKey('plants.id'), index=True)

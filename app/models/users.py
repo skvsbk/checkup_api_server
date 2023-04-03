@@ -7,10 +7,10 @@ from app.models.roles import RoleDB
 class UserDB(Base):
     __tablename__ = 'users'
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
-    login = Column(String(10), unique=True)
+    login = Column(String(20), unique=True)
     password = Column(String(256))
     role_id = Column(Integer, ForeignKey('user_roles.id'), index=True)
-    name = Column(String(50))
+    name = Column(String(100))
     active = Column(Boolean())
 
     roles = relationship('RoleDB', backref='users')

@@ -21,13 +21,16 @@ def get_plants_by_facility_id(db: Session, facility_id: int):
 
 def get_plant_by_nfc_serial(db: Session, nfc_serial: str):
     """
-    SELECT plants.name, facilities.name FROM plants
+    SELECT plants.name, plants.description_plant, plants.description_params, facilities.name FROM plants
     JOIN nfc_tag ON plants.id = nfc_tag.plant_id
     JOIN facilities ON plants.facility_id = facilities.id
     WHERE nfc_tag.nfc_serial = "53E9DC63200001" AND nfc_tag.active = 1
     """
     # todo: add facility_id from request
-    return db.query(plants.PlantsDB.name.label('plant_name'), facilities.FacilitiesDB.name.label('facility_name')). \
+    return db.query(plants.PlantsDB.name.label('plant_name'),
+                    plants.PlantsDB.description_plant.label('description_plant'),
+                    plants.PlantsDB.description_params.label('description_params'),
+                    facilities.FacilitiesDB.name.label('facility_name')). \
         join(nfc.NfcTagDB, nfc.NfcTagDB.plant_id == plants.PlantsDB.id). \
         join(facilities.FacilitiesDB, facilities.FacilitiesDB.id == plants.PlantsDB.facility_id). \
         filter(nfc.NfcTagDB.nfc_serial == nfc_serial). \
@@ -50,7 +53,10 @@ def get_plant_by_name(db: Session, plant_name: str, facility_id: int):
 # save to DB (http://127.0.0.1:8000/plants/?plant_name=1.012&facility_id=1)
 def create_plant(db: Session, plant: PlantCreate):
     db_plant = plants.PlantsDB(name=plant.name,
-                               facility_id=plant.facility_id)
+                               facility_id=plant.facility_id,
+                               description_plant=plant.description_plant,
+                               description_params=plant.description_params
+                               )
     create_base(db, db_plant)
     return db_plant
 

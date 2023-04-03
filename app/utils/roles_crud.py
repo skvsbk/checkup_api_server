@@ -16,6 +16,6 @@ def get_role_id(db: Session, role_name: str):
 
 # use for first start
 def create_role(db: Session, role: RoleCreate):
-    db_role = roles.RoleDB(role_name=role.name)
+    db_role = roles.RoleDB(name=role.name)
     create_base(db, db_role)
     return db_role
